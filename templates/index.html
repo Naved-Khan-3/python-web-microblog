@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Rewind</title>
+    <div class = 'header'>
+        <div class = 'header__title'>
+            <h2>Rewind</h2>
+        </div>
+        <a class = 'header__recent'>Recent</a>
+        <a class = 'header__calendar'>Calendar</a>       
+    </div>
+</head>
+
+<body>
+    <div class = 'midsection'>
+        <form action = '/save' method = 'POST'>
+            <label class = 'midsection__labeljournal' for = 'midsection__journal'>What's on your mind?</label>
+            <textarea name = 'text' class = 'midsection__journal' id = 'midsection__journal'></textarea>
+            <button class = 'submitbutton' type = 'submit'>Add Entry</button>
+        </form>
+        <label class = 'midsection__labelrecent' for = 'midsection__recent'>RECENT</label>
+        <article class = 'midsection__recent'>{{content}}</article>
+    </div>
+</body>
+
+<footer>
+    <div class = 'bottom'>
+        <a>More such projects</a>
+        <a>Github Profile</a>
+    </div>
+</footer>
+
+</html>

@@ -1,24 +1,32 @@
 from flask import Flask, render_template, request
+from pymongo import MongoClient 
 import datetime
+
 app = Flask(__name__)
+uri = "mongodb+srv://nhkhan7773:3kwaPuB77gvtJJK1@cluster0.mdmusq4.mongodb.net/?retryWrites=true&w=majority"
+
+client = MongoClient(uri)
+db = client["rewind_db"]
+collection = db["journals"]
+
 @app.route("/")
 def index():
-    with open("output.txt", "r") as file:
-        content = file.read()
-    return render_template('index.html', content = content)
+    documents = list(collection.find().sort("_id", -1).limit(3))
+    return render_template('index.html', documents = documents)
 
-@app.route('/save', methods=['POST'])
+@app.route("/save", methods=['POST'])
 def save_text():
-    today = datetime.date.today()
-    text = request.form.get('text')
-    if text:
-        with open('output.txt', 'a') as file:
-            file.write(f"{text} {today}\n")
-        return "Text saved successfully!"
-    else:
-        return "No text provided"
-
-
+        today = datetime.datetime.today()
+        text = request.form.get('text')
+        if text:
+            document = {
+                "entry": text,
+                "date": today
+            }
+            result = collection.insert_one(document)
+            return "Text saved successfully"          
+        else:
+             return "No text provided"
 
 if __name__ == "__main__":
     app.run(debug=True)

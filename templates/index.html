@@ -23,7 +23,12 @@
             <button class = 'submitbutton' type = 'submit'>Add Entry</button>
         </form>
         <label class = 'midsection__labelrecent' for = 'midsection__recent'>RECENT</label>
-        <article class = 'midsection__recent'>{{content}}</article>
+        <article class = 'midsection__recent'>
+            {% for document in documents%}
+                <p class = "document_entry">{{document.entry}}</p>
+                <p>{{document.date}}</p>
+            {% endfor %}
+        </article>
     </div>
 </body>
 

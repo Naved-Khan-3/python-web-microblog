@@ -76,3 +76,8 @@ footer{
     font-size: large;
 
 }
+
+.document_entry{
+    font-style: italic;
+    font-weight: bold;
+}
